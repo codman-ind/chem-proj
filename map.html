@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset and Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        #map {
+            height: 500px; /* Set the height for the map */
+            width: 100%; /* Set the width for the map */
+            margin: auto; /* Center the map */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Hybrid Seeds Impact</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="adopt-crops.html">crop Gallery</a></li>
+                <li><a href="resources.html">Education Resources</a></li>
+                <li><a href="map.html">Interactive Map</a></li>
+                <li><a href="chat.html">Farmer Chat</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="calculator.html">Yield Calculator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h2 style="text-align:center; margin: 20px;">Crop Regions Map</h2>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered on India
+        const map = L.map('map').setView([20.5937, 78.9629], 5);
+
+        // Add OpenStreetMap tiles as the map's base layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Array of crop regions with latitude, longitude, and crop information
+        const cropRegions = [
+    { lat: 28.6139, lng: 77.2090, crop: "Wheat - Delhi", description: "Wheat is a major Rabi crop in North India." },
+    { lat: 23.2599, lng: 77.4126, crop: "Rice - Madhya Pradesh", description: "Rice is a staple food and widely cultivated in the Kharif season." },
+    { lat: 19.7515, lng: 75.7139, crop: "Millet - Maharashtra", description: "Millets are drought-resistant and suitable for dryland agriculture." },
+    { lat: 26.9124, lng: 75.7873, crop: "Pulses - Rajasthan", description: "Pulses are important for soil fertility and nutrition." },
+    { lat: 13.0827, lng: 80.2707, crop: "Cotton - Tamil Nadu", description: "Cotton is a significant cash crop in Tamil Nadu." },
+    { lat: 30.7333, lng: 76.7794, crop: "Basmati Rice - Punjab", description: "Basmati rice is known for its aromatic fragrance and long grains." },
+    { lat: 17.3850, lng: 78.4867, crop: "Chili - Telangana", description: "Telangana is famous for its high-quality red chili production." },
+    { lat: 21.1458, lng: 79.0882, crop: "Soybean - Maharashtra", description: "Soybean is a key oilseed crop with high protein content." },
+    { lat: 28.6139, lng: 77.2090, crop: "Sugarcane - Uttar Pradesh", description: "Uttar Pradesh is the largest producer of sugarcane in India." },
+    { lat: 19.0750, lng: 72.8777, crop: "Pomegranate - Maharashtra", description: "Maharashtra is known for its quality pomegranate production." },
+    { lat: 11.0168, lng: 76.9558, crop: "Tea - Tamil Nadu", description: "Nilgiri tea is famous for its unique flavor and aroma." },
+    { lat: 26.4600, lng: 80.3270, crop: "Barley - Uttar Pradesh", description: "Barley is grown mainly in the cooler regions of India." },
+    { lat: 22.9734, lng: 78.6569, crop: "Groundnut - Madhya Pradesh", description: "Groundnuts are primarily grown for oil extraction." },
+    { lat: 23.3441, lng: 85.3095, crop: "Mango - Jharkhand", description: "Jharkhand is known for its unique varieties of mango." }
+];
+
+
+        // Add markers to the map with popups for each crop region
+        cropRegions.forEach(region => {
+            L.marker([region.lat, region.lng])
+                .addTo(map)
+                .bindPopup(`<strong>${region.crop}</strong><br>This crop is widely grown in this region.`);
+        });
+    </script>
+</body>
+</html>
